@@ -4,7 +4,7 @@ import 'api.dart';
 class UserRepository {
   UserApiProvider userApiProvider = UserApiProvider();
 
-  Future<List<User>> getUser() {
-    return userApiProvider.getUsers();
+  Future<List<User>> getUsers() async {
+    return await userApiProvider.getUsers();
   }
 }
