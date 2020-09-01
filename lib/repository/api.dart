@@ -18,6 +18,9 @@ class UserApiProvider {
   Future<List<Post>> getPosts() async {
     try {
       Response response = await dio.get(postEndPoint);
+      print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
+      print(response.data);
+      print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
       return (response.data as List).map((i) => Post.fromJson(i)).toList();
     } catch (error, stacktrace) {
       throw Exception("Exception occured: $error stackTrace: $stacktrace");

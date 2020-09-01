@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview/bloc/bloc.dart';
 import 'package:interview/repository/reposetory.dart';
 import 'package:interview/views/detail_page.dart';
-import 'package:interview/models/models.dart';
+// import 'package:interview/models/models.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               //     filteredPosts.add(state.posts[index]);
               // print(filteredPosts);
               // print("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-              UserRepository repository = UserRepository();
+              PostRepository repository = PostRepository();
               return ListTile(
                 title: Text('${state.users[index].name}'),
                 subtitle: Text('${state.users[index].email}'),
@@ -58,20 +58,18 @@ class _HomePageState extends State<HomePage> {
                   child: Icon(Icons.check),
                 ),
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return BlocProvider(
-                  //         create: (context) => PostBloc(repository: repository)..add(FetchPost(User user)),
-                  //         child: PostView(
-                  //           user: state.users[index],
-                  //           posts: state.posts,
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return BlocProvider(
+                          create: (context) => PostBloc(repository: repository)
+                            ..add(FetchPost()),
+                          child: PostView(),
+                        );
+                      },
+                    ),
+                  );
                 },
               );
             },

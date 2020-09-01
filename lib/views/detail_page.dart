@@ -1,34 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:interview/bloc/bloc.dart';
 import 'package:interview/models/models.dart';
 import 'package:meta/meta.dart';
 
-class PostView extends StatelessWidget {
-  final List<Post> posts;
-  final User user;
-  PostView({@required this.posts, @required this.user});
+class PostView extends StatefulWidget {
+  @override
+  _PostViewState createState() => _PostViewState();
+}
+
+class _PostViewState extends State<PostView> {
+  PostBloc postBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    postBloc = BlocProvider.of<PostBloc>(context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    postBloc.close();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Post of User'),
+        title: Text('Posts Of User'),
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: posts.length,
-          itemBuilder: (context, index) {
-            if (posts[index].userId == user.id) {
-              return ListTile(
-                title: Text(
-                  '${posts[index].title}',
-                  style: TextStyle(fontSize: 18),
-                ),
-                subtitle: Text('${posts[index].description}'),
-              );
-            }
-            return SizedBox(height: 0, width: 0);
-          },
-        ),
+      body: BlocBuilder<PostBloc, PostState>(
+        builder: (context, state) {
+          if (state is PostEmpty) {
+            print('post empty');
+            return Center(
+              child: Text('Load Post'),
+            );
+          }
+          if (state is PostLoading) {
+            print('loading post');
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is PostLoaded) {
+            print('post loaded');
+            return ListView.builder(
+              itemCount: state.posts.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text('${state.posts[index].title}'),
+                  subtitle: Text('${state.posts[index].description}'),
+                );
+              },
+            );
+          }
+          if (state is PostError) {
+            print('post error');
+            return Center(
+              child: Text('Error'),
+            );
+          }
+          return Container(
+            width: 0,
+            height: 0,
+          );
+        },
       ),
     );
   }
