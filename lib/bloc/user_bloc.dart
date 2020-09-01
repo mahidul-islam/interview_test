@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'bloc.dart';
@@ -6,8 +7,11 @@ import 'package:interview/models/models.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository repository;
+  HashMap<int, List<Post>> _cachedPosts;
 
-  UserBloc({@required this.repository}) : assert(repository != null);
+  UserBloc({@required this.repository}) : assert(repository != null) {
+    _cachedPosts = HashMap<int, List<Post>>();
+  }
 
   @override
   UserState get initialState => UserEmpty();
@@ -18,7 +22,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield UserLoading();
       try {
         final List<User> users = await repository.getUsers();
-        yield UserLoaded(users: users);
+        yield UserLoaded(users: users, cache: _cachedPosts);
       } catch (_) {
         yield UserError();
       }

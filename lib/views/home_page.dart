@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) {
                         return BlocProvider(
                           create: (context) => PostBloc(
+                            cachedPosts: state.cache,
                             repository: repository,
                             singleUser: state.users[index],
                           )..add(FetchPost()),

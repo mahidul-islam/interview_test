@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
@@ -16,8 +18,9 @@ class UserLoading extends UserState {}
 
 class UserLoaded extends UserState {
   final List<User> users;
+  final HashMap<int, List<Post>> cache;
 
-  const UserLoaded({@required this.users}) : assert(users != null);
+  const UserLoaded({@required this.users, this.cache}) : assert(users != null);
 
   @override
   List<Object> get props => users;

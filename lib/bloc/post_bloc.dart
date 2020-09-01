@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'bloc.dart';
@@ -7,9 +8,13 @@ import 'package:interview/models/models.dart';
 class PostBloc extends Bloc<PostEvent, PostState> {
   final PostRepository repository;
   final User singleUser;
+  HashMap<int, List<Post>> cachedPosts;
 
-  PostBloc({@required this.repository, this.singleUser})
-      : assert(repository != null, singleUser != null);
+  PostBloc({
+    @required this.repository,
+    @required this.singleUser,
+    @required this.cachedPosts,
+  }) : assert(repository != null, singleUser != null);
 
   @override
   PostState get initialState => PostEmpty();
@@ -19,10 +24,12 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     if (event is FetchPost) {
       yield PostLoading();
       try {
-        final List<Post> posts = await repository.getPosts();
-        print(posts);
-        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        yield PostLoaded(user: singleUser, posts: posts);
+        if (!cachedPosts.containsKey(singleUser.id)) {
+          print('+++++++++++++++++++++++++++++++++++++++++++');
+          final List<Post> posts = await repository.getPosts();
+          cachedPosts[singleUser.id] = posts;
+        }
+        yield PostLoaded(user: singleUser, posts: cachedPosts[singleUser.id]);
       } catch (_) {
         print(_);
         yield PostError();
