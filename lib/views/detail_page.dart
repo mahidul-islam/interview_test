@@ -26,10 +26,7 @@ class PostView extends StatelessWidget {
                 subtitle: Text('${posts[index].description}'),
               );
             }
-            return SizedBox(
-              height: 0,
-              width: 0,
-            );
+            return SizedBox(height: 0, width: 0);
           },
         ),
       ),
