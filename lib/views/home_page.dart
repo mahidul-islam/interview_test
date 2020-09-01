@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview/bloc/bloc.dart';
+import 'package:interview/views/detail_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,7 +19,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
-      bloc: userBloc,
       builder: (context, state) {
         if (state is UserEmpty) {
           print('empty');
@@ -42,11 +42,21 @@ class _HomePageState extends State<HomePage> {
                 leading: CircleAvatar(
                   child: Icon(Icons.check),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PostView(
+                          posts: [],
+                        );
+                      },
+                    ),
+                  );
+                },
               );
             },
           );
-          // return Text('hello');
         }
         return Text('hello hello');
       },

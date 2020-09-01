@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 class Post extends Equatable {
-  int userId;
-  String title;
-  String description;
+  final int userId;
+  final String title;
+  final String description;
 
   Post({this.userId, this.title, this.description});
 
@@ -14,7 +14,7 @@ class Post extends Equatable {
     return Post(
       userId: json['userId'],
       title: json['title'],
-      description: json['description'],
+      description: json['body'],
     );
   }
 }

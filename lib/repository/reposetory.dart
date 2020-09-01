@@ -7,4 +7,10 @@ class UserRepository {
   Future<List<User>> getUsers() async {
     return await userApiProvider.getUsers();
   }
+
+  Future<List<Post>> getPosts(User user) async {
+    List<Post> posts = await userApiProvider.getPosts();
+    posts.removeWhere((Post post) => post.userId != user.id);
+    return posts;
+  }
 }
