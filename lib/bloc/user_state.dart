@@ -16,18 +16,11 @@ class UserLoading extends UserState {}
 
 class UserLoaded extends UserState {
   final List<User> users;
-  final List<Post> posts;
 
-  const UserLoaded({
-    @required this.users,
-    @required this.posts,
-  }) : assert(
-          users != null,
-          posts != null,
-        );
+  const UserLoaded({@required this.users}) : assert(users != null);
 
   @override
-  List<Object> get props => [users, posts];
+  List<Object> get props => users;
 }
 
 class UserError extends UserState {}

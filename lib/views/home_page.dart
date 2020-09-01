@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview/bloc/bloc.dart';
 import 'package:interview/repository/reposetory.dart';
 import 'package:interview/views/detail_page.dart';
-// import 'package:interview/models/models.dart';
 
 class HomePage extends StatefulWidget {
   @override

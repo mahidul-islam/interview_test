@@ -8,11 +8,6 @@ class UserRepository {
   Future<List<User>> getUsers() async {
     return await userApiProvider.getUsers();
   }
-
-  Future<List<Post>> getPosts() async {
-    List<Post> posts = await userApiProvider.getPosts();
-    return posts;
-  }
 }
 
 class PostRepository {

@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserRepository repository = UserRepository();
-    // print(repository);
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
