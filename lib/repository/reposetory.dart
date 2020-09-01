@@ -1,4 +1,5 @@
 import 'package:interview/models/models.dart';
+import 'package:meta/meta.dart';
 import 'api.dart';
 
 class UserRepository {
@@ -10,7 +11,6 @@ class UserRepository {
 
   Future<List<Post>> getPosts() async {
     List<Post> posts = await userApiProvider.getPosts();
-    // posts.removeWhere((Post post) => post.userId != user.id);
     return posts;
   }
 }
@@ -18,14 +18,12 @@ class UserRepository {
 class PostRepository {
   PostApiProvider postApiProvider = PostApiProvider();
   User user;
-  PostRepository({this.user});
+  PostRepository({@required this.user});
 
   Future<List<Post>> getPosts() async {
     List<Post> posts = await postApiProvider.getPosts();
-    // posts.removeWhere((Post post) => post.userId != user.id);
-    print('===========================================================');
-    print(posts);
-    print('===========================================================');
+    posts.removeWhere((Post post) => post.userId != user.id);
+    posts.sort((Post a, Post b) => a.title.length.compareTo(b.title.length));
     return posts;
   }
 }

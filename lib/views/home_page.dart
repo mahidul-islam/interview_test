@@ -44,13 +44,8 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
             itemCount: state.users.length,
             itemBuilder: (context, index) {
-              // List<Post> filteredPosts;
-              // for (int i = 0; i < state.posts.length; i++)
-              //   if (state.posts[index].userId != state.users[index].id)
-              //     filteredPosts.add(state.posts[index]);
-              // print(filteredPosts);
-              // print("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-              PostRepository repository = PostRepository();
+              PostRepository repository =
+                  PostRepository(user: state.users[index]);
               return ListTile(
                 title: Text('${state.users[index].name}'),
                 subtitle: Text('${state.users[index].email}'),
@@ -77,7 +72,14 @@ class _HomePageState extends State<HomePage> {
             },
           );
         }
-        return null;
+        if (state is UserError) {
+          return Center(
+            child: Text('Please Fix the Error'),
+          );
+        }
+        return Center(
+          child: Text('You are in trouble'),
+        );
       },
     );
   }
