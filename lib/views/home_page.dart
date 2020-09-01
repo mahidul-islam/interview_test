@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview/bloc/bloc.dart';
 import 'package:interview/views/detail_page.dart';
+import 'package:interview/models/models.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,6 +15,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     userBloc = BlocProvider.of<UserBloc>(context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    userBloc.close();
   }
 
   @override
@@ -36,6 +43,13 @@ class _HomePageState extends State<HomePage> {
           return ListView.builder(
             itemCount: state.users.length,
             itemBuilder: (context, index) {
+              // List<Post> filteredPosts;
+              // for (int i = 0; i < state.posts.length; i++)
+              //   if (state.posts[index].userId != state.users[index].id)
+              //     filteredPosts.add(state.posts[index]);
+              // print(filteredPosts);
+              // print("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
               return ListTile(
                 title: Text('${state.users[index].name}'),
                 subtitle: Text('${state.users[index].email}'),
@@ -48,7 +62,8 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return PostView(
-                          posts: [],
+                          user: state.users[index],
+                          posts: state.posts,
                         );
                       },
                     ),
@@ -58,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             },
           );
         }
-        return Text('hello hello');
+        return null;
       },
     );
   }

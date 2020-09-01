@@ -8,9 +8,9 @@ class UserRepository {
     return await userApiProvider.getUsers();
   }
 
-  Future<List<Post>> getPosts(User user) async {
+  Future<List<Post>> getPosts() async {
     List<Post> posts = await userApiProvider.getPosts();
-    posts.removeWhere((Post post) => post.userId != user.id);
+    // posts.removeWhere((Post post) => post.userId != user.id);
     return posts;
   }
 }

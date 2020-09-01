@@ -18,7 +18,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       yield UserLoading();
       try {
         final List<User> users = await repository.getUsers();
-        yield UserLoaded(users: users);
+        final List<Post> posts = await repository.getPosts();
+        yield UserLoaded(users: users, posts: posts);
       } catch (_) {
         yield UserError();
       }

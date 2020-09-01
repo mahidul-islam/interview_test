@@ -4,7 +4,8 @@ import 'package:meta/meta.dart';
 
 class PostView extends StatelessWidget {
   final List<Post> posts;
-  PostView({@required this.posts});
+  final User user;
+  PostView({@required this.posts, @required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +15,20 @@ class PostView extends StatelessWidget {
       ),
       body: Container(
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: posts.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('This is it'),
+            if (posts[index].userId == user.id) {
+              return ListTile(
+                title: Text(
+                  '${posts[index].title}',
+                  style: TextStyle(fontSize: 18),
+                ),
+                subtitle: Text('${posts[index].description}'),
+              );
+            }
+            return SizedBox(
+              height: 0,
+              width: 0,
             );
           },
         ),
