@@ -9,9 +9,10 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    UserRepository repository = UserRepository();
+    // print(repository);
     return MaterialApp(
       title: 'Flutter Demo',
       home: Scaffold(
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
           title: Text('Interview Demo'),
         ),
         body: BlocProvider(
-          create: (context) => UserBloc(repository: UserRepository()),
+          create: (context) =>
+              UserBloc(repository: repository)..add(FetchUser()),
           child: HomePage(),
         ),
       ),

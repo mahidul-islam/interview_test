@@ -7,12 +7,10 @@ import 'package:interview/models/models.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository repository;
 
-  UserBloc({@required this.repository})
-      : assert(repository != null),
-        super(null);
+  UserBloc({@required this.repository}) : assert(repository != null);
 
-  // @override
-  // UserState get initialState => UserEmpty();
+  @override
+  UserState get initialState => UserEmpty();
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {

@@ -8,7 +8,9 @@ class UserApiProvider {
   Future<List<User>> getUsers() async {
     try {
       Response response = await dio.get(endPoint);
-      print(response);
+      // print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+      // print(response.data);
+      // print('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
       return (response.data as List).map((i) => User.fromJson(i)).toList();
     } catch (error, stacktrace) {
       throw Exception("Exception occured: $error stackTrace: $stacktrace");
