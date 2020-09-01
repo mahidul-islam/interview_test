@@ -11,7 +11,6 @@ class Post extends Equatable {
   List<Object> get props => [userId, title, description];
 
   static Post fromJson(dynamic json) {
-    print('I think error is here');
     return Post(
       userId: json['userId'],
       title: json['title'],

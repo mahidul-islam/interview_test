@@ -25,7 +25,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       yield PostLoading();
       try {
         if (!cachedPosts.containsKey(singleUser.id)) {
-          print('+++++++++++++++++++++++++++++++++++++++++++');
+          print('post of ${singleUser.name} caching');
           final List<Post> posts = await repository.getPosts();
           cachedPosts[singleUser.id] = posts;
         }

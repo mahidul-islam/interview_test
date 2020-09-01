@@ -14,6 +14,7 @@ dependencies:
 
   # package added by me  
   dio: ^3.0.10
+  dio_http_cache: ^0.2.6
   connectivity: ^0.4.9+2
   flutter_bloc: ^4.0.0
   equatable: ^1.2.4

@@ -57,7 +57,7 @@ class _PostViewState extends State<PostView> {
           if (state is PostError) {
             print('post error');
             return Center(
-              child: Text('Error'),
+              child: Text('There is no Internet Connection'),
             );
           }
           return Container(

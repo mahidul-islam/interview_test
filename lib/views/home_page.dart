@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         }
         if (state is UserError) {
           return Center(
-            child: Text('Please Fix the Error'),
+            child: Text('There is no internet Connection'),
           );
         }
         return Center(
