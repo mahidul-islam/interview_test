@@ -63,8 +63,10 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return BlocProvider(
-                          create: (context) => PostBloc(repository: repository)
-                            ..add(FetchPost()),
+                          create: (context) => PostBloc(
+                            repository: repository,
+                            singleUser: state.users[index],
+                          )..add(FetchPost()),
                           child: PostView(),
                         );
                       },

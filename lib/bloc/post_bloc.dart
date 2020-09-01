@@ -20,8 +20,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       yield PostLoading();
       try {
         final List<Post> posts = await repository.getPosts();
+        print(posts);
+        print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         yield PostLoaded(user: singleUser, posts: posts);
       } catch (_) {
+        print(_);
         yield PostError();
       }
     }

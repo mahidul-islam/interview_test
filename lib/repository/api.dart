@@ -27,3 +27,21 @@ class UserApiProvider {
     }
   }
 }
+
+class PostApiProvider {
+  final String postEndPoint = "https://jsonplaceholder.typicode.com/posts";
+  final Dio dio = Dio();
+
+  Future<List<Post>> getPosts() async {
+    try {
+      Response response = await dio.get(postEndPoint);
+      print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
+      print(response.data);
+      print('+++++++++++++++++++++++++++++++++++++++++++++++++++++');
+      return (response.data as List).map((i) => Post.fromJson(i)).toList();
+    } catch (error, stacktrace) {
+      print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      throw Exception("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
+}

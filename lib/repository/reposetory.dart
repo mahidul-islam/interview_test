@@ -16,13 +16,16 @@ class UserRepository {
 }
 
 class PostRepository {
-  UserApiProvider userApiProvider = UserApiProvider();
+  PostApiProvider postApiProvider = PostApiProvider();
   User user;
   PostRepository({this.user});
 
   Future<List<Post>> getPosts() async {
-    List<Post> posts = await userApiProvider.getPosts();
+    List<Post> posts = await postApiProvider.getPosts();
     // posts.removeWhere((Post post) => post.userId != user.id);
+    print('===========================================================');
+    print(posts);
+    print('===========================================================');
     return posts;
   }
 }
